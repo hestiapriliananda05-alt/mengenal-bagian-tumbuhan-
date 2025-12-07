@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Simulasi Bagian Tubuh Tumbuhan</title>
+<style>
+  body { font-family: Times New Roman, Sans-Serif; background-image: url('hana.jpeg') ;
+  background-size: 390px 1100px ; 
+  background-position: full; 
+  background-repeat:repeat; 
+  margin: 0px; 
+  padding: 0px;
+  font-size: 20px;
+  }
+  .container { text-align: center; padding: 45px;
+  }
+  button { padding: 12px 20px; margin: 30px; border: none; background-color: #043927; color: white; border-radius: 30px; font-size: 20px; cursor: pointer; }
+  button:hover { background-color: #043927; }
+  .hidden { display: none; }
+  .back-btn { position: absolute; top: 20px; left: 20px; padding: 6px 10px; background-color: #6bbf73; color: white; border-radius: 30px; cursor: pointer; }
+  .img-area { position: relative; display: inline-block; }
+  .label { position: absolute; background: rgba(0,0,0,0.6); color: white; padding: 5px 8px; border-radius: 6px; cursor: pointer; font-size: 14px; }
+  .popup { background: white; width: 80%; margin: 20px auto; padding: 20px; border-radius: 12px; box-shadow: 0 0 10px rgba(0,0,0,0.2); }
+  .question-box { background:white; padding:20px; width:85%; margin:auto; border-radius:10px; }
+  .score-box { font-size: 24px; font-weight: bold; }
+
+</style>
+</head>
+<body>
+
+<style>
+  .judul { 
+  color:#043927;
+  text-shadow:3px 5px 5px white;
+  font-size: 35px;
+  margin-bottom: 100px;
+  }
+</style>
+<style>
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 0 0px rgba(255, 255, 255, 0.4);
+  }
+  50% {
+    transform: scale(1.05);
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.8);
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 0px rgba(255, 255, 255, 0.4);
+  }
+}
+.blink {
+  padding: 10px 20px;
+  font-size: 24px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  background: #206779;
+  color: white;
+  animation: pulse 1.8s infinite;
+  transition: 0.2s ease;
+}
+button:active {
+  transform: scale(0.95);
+  box-shadow: 0 0 25px rgba(0,255,0,1);
+}
+</style>
+<div id="intro" class="container">
+  <h1 class="judul"> Mengenal Bagian 🌱Tumbuhan🌱</h1> 
+  <button onclick="goToMenu()" class="blink">Mulai Belajar🦋</button>
+</div>
+
+<style>
+  .isi { 
+  color:#043927;
+  text-shadow:3px 5px 5px white;
+  font-size: 30px;
+  margin-bottom: 50px;
+  }
+</style>
+
+  
+<style>
+  button {
+    padding: 10px 20px;
+  font-size: 20px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  background: #206779;
+  color: white;
+  animation: pulse 1.8s infinite;
+  transition: 0.2s ease;
+  }
+</style>
+<div id="menu" class="container hidden">
+  <h2 class="isi">Pilih Menu</h2>
+  <button onclick="showMateri()">Materi Ajar🧠</button>
+  <button onclick="startQuiz()">Latihan Soal💡</button>
+</div>
+
+<div id="materi" class="container hidden">
+  <div class="back-btn" onclick="backToMenu()">◀️ Back</div>
+  
+<style>
+  .lala { 
+  color:#043927;
+  text-shadow:3px 5px 5px white;
+  font-size: 30px;
+  }
+</style>
+
+<style>
+  .label{
+  0% {
+    transform: scale(1);
+    box-shadow: 0 0 0px rgba(255, 255, 255, 0.4);
+  }
+  50% {
+    transform: scale(1.05);
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.8);
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 0px rgba(255, 255, 255, 0.4);
+  }
+</style>
+  <h2 class="lala">Bagian Tumbuhan</h2>
+  <div class="img-area">
+    <img src="tumbuhan.jpeg" width="250">
+    <div class="label" style="top:115px; left:135px;" onclick="showInfo('bunga')">Bunga</div>
+    <div class="label" style="top:170px; left:30px;" onclick="showInfo('daun')">Daun</div>
+    <div class="label" style="top:250px; left:100px;" onclick="showInfo('batang')">Batang</div>
+    <div class="label" style="top:210px; left:170px;" onclick="showInfo('buah')">Buah</div>
+    <div class="label" style="top:320px; left:105px;" onclick="showInfo('akar')">Akar</div>
+  </div>
+
+  <div id="popup-info" class="popup hidden"></div>
+</div>
+
+<div id="quiz" class="container hidden">
+  <div class="back-btn" onclick="backToMenu()">◀️Back</div>
+  
+
+<style>
+  .po { 
+  color:#043927;
+  text-shadow:3px 5px 5px white;
+  font-size: 30px;
+  }
+</style>
+  <h2 class="po">Latihan Soal</h2>
+  <div id="question-box" class="question-box"></div>
+  <button id="next-btn" onclick="nextQuestion()">Selanjutnya ➤</button>
+  <button id="finish-btn" class="hidden" onclick="finishQuiz()">Selesai</button>
+</div>
+
+<div id="score" class="container hidden">
+
+
+<style>
+  .tinky { 
+  color:red;
+  font-size: 35px;
+  }
+</style>
+  <h2 class="tinky">🎉Skor Akhir🎉</h2>
+  <div id="score-value" class="score-box"></div>
+  <button onclick="location.reload()">Mulai Lagi</button>
+</div>
+<style>
+.question-box {
+    background: white;
+    padding: 25px;
+    border-radius: 20px;
+    width: 85%;
+    margin: auto;
+    box-shadow: 0px 5px 15px rgba(0,0,0,0.15);
+    text-align: left;
+    font-size: 20px;
+    line-height: 1.6;
+    font-family: 'Poppins', sans-serif;
+}
+
+.question-box h3 {
+    font-weight: 600;
+    font-size: 22px;
+    margin-bottom: 20px;
+}
+
+.question-option {
+    background: white;
+    border-radius: 15px;
+    padding: 15px 18px;
+    margin: 12px 0px;
+    box-shadow: 0px 4px 12px rgba(0,0,0,0.12);
+    font-size: 18px;
+    cursor: pointer;
+    transition: 0.2s ease;
+    border: 2px solid transparent;
+}
+.question-option:hover {
+    transform: scale(1.02);
+    border-color: #4aa3ff;
+}
+
+input[type="radio"]:checked + label {
+    border-color: #4aa3ff;
+    background: #e8f3ff;
+    transform: scale(1.02);
+}
+</style>
+<script>
+function goToMenu(){ document.getElementById('intro').classList.add('hidden'); document.getElementById('menu').classList.remove('hidden'); }
+function backToMenu(){ hideAll(); document.getElementById('menu').classList.remove('hidden'); }
+function hideAll(){ document.getElementById('menu').classList.add('hidden'); document.getElementById('materi').classList.add('hidden'); document.getElementById('quiz').classList.add('hidden'); document.getElementById('score').classList.add('hidden'); }
+
+function showMateri(){ hideAll(); document.getElementById('materi').classList.remove('hidden'); }
+
+function showInfo(part){
+  const info = {
+    akar: " Akar 🫚 berfungsi mengambil air dan zat makanan dari dalam tanah agar tumbuhan dapat tumbuh. Ciri-ciri akar : berada di bawah tanah, bentuknya memanjang dan bercabang, berwarna cokelat.",
+    batang: "Batang 🪵 seperti jalan raya bagi tumbuhan. Di dalam batang terdapat saluran yang mengalirkan air dan makanan dari akar ke seluruh tubuh. Ciri - ciri batang : bentuknya memanjang, keras atau lunak, menopang daun, bunga, dan buah,berada di atas tanah.",
+    daun: "Daun ☘️ menggunakan cahaya matahari, air, dan udara untuk membuat makanan bagi tumbuhan (fotosintesis). Ciri - ciri daun : berwarna hijau, berbentuk pipih dan tipis, memiliki tulang daun",
+    bunga: "Bunga 🌻 berfungsi sebagai alat perkembangbiakan tumbuhan, hasil dari perkembangbiakan nantinya akan terbentuk buah dan biji. Ciri - cir bungai : memiliki warna mencolok, terdiri dari kelopak dan mahkota, biasanya berada di ujung batang atau cabang.",
+    buah: "Buah 🍅 berfungsi menyimpan dan menjaga biji agar tumbuhan dapat memperbanyak diri. Ciri - ciri buah :  bentuknya bermacam-macam, di dalamnya terdapat biji.",
+  };
+  const box = document.getElementById('popup-info');
+  box.innerHTML = `<h3>${part.toUpperCase()}</h3><p>${info[part]}</p>`;
+  box.classList.remove('hidden');
+}
+
+// QUIZ
+let current = 0;
+let score = 0;
+const questions = [
+  {q:"Bagian tumbuhan yang berada di dalam tanah dan berfungsi menyerap air adalah...", a:"Akar", o:["Daun","Akar","Batang","Bunga"]},
+  {q:"Bagian tumbuhan yang berwarna hijau dan digunakan untuk membuat makanan adalah...", a:"Daun", o:["Akar","Buah","Daun","Batang"]},
+  {q:"Batang memiliki fungsi utama sebagai...", a:"Penopang seluruh tubuh tumbuhan", o:["Tempat membuat makanan","Penopang seluruh tubuh tumbuhan","Pelindung biji","Memarik Serangga"]},
+  {q:"Bunga pada tumbuhan berfungsi untuk...", a:"Tempat perkembangbiakan", o:["Menyerap zat hara","Melindungi biji","Tempat perkembangbiakan","Mengalirkan air"]},
+  {q:"Bagian tumbuhan yang biasanya dapat dimakan dan berisi biji disebut...", a:"Buah", o:["Akar","Batang","Bunga","Buah"]},
+  {q:"Ciri-ciri berikut yang menunjukkan akar adalah...", a:"Memanjang,bercabang, dan berada di dalam tanah", o:["Berwarna cerah dan berada di ujung batang","Pipih dan berwarna hijau","Memanjang,bercabang, dan berada di dalam tanah","Memiliki kelopak dan mahkota"]},
+  {q:"Jika suatu bagian tumbuhan berbentuk memanjang, keras atau lunak, dan menopang daun, maka bagian itu adalah...", a:"Batang", o:["Akar","Daun","Batang","Buah"]},
+  {q:"Bagian tumbuhan yang memiliki warna menarik dan biasanya berada di ujung batang adalah...", a:"Bunga", o:["Bunga","Daun","Akar","Buah"]},
+  {q:"Buah berfungsi untuk...", a:"Menyimpan dan melindungi biji", o:["Menyimpan dan melindungi biji","Mengalirkan air ke daun","Membuat makanan bagi tumbuhan","Menyerap air dari tanah"]},
+  {q:"Daun dapat dikenali melalui ciri-ciri berikut, kecuali...", a:"Berada di dalam tanah", o:["Berwarna hijau","Bentuk pipih","Memiliki tulang daun","Berada di dalam tanah"]},
+
+];
+
+function startQuiz(){ hideAll(); current=0; score=0; document.getElementById('quiz').classList.remove('hidden'); loadQuestion(); }
+
+function loadQuestion(){
+  const q = questions[current];
+  let html = `<h3>${q.q}</h3>`;
+  q.o.forEach(opt => { html += `<div><input type='radio' name='opt' value='${opt}'> ${opt}</div>`; });
+  document.getElementById('question-box').innerHTML = html;
+  document.getElementById('next-btn').classList.remove('hidden');
+  document.getElementById('finish-btn').classList.add('hidden');
+  if(current === questions.length-1){ document.getElementById('next-btn').classList.add('hidden'); document.getElementById('finish-btn').classList.remove('hidden'); }
+}
+
+function nextQuestion(){ checkAnswer(); current++; loadQuestion(); }
+function finishQuiz(){ checkAnswer(); hideAll(); document.getElementById('score').classList.remove('hidden'); document.getElementById('score-value').innerHTML = `Skor Anda: ${score}/${questions.length}`; }
+function checkAnswer(){ const selected=document.querySelector('input[name=opt]:checked'); if(selected && selected.value === questions[current].a){ score++; } }
+</script>
+
+</body>
+</html>
